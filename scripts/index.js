@@ -6,20 +6,22 @@ const loadCategories = async () => {
     const categoryContainer = document.getElementById('category-container');
     allCategories.forEach((singleCategory)=>{
         const div = document.createElement('div');
-        div.innerHTML = `<button class="btn">${singleCategory.category_name}</button>`;
+        div.innerHTML = `<button onclick= "loadNews('${singleCategory.category_id}')" class="btn">${singleCategory.category_name}</button>`;
         categoryContainer.appendChild(div);
     })
 }
 // Load all news and display to the UI.
-const loadNews = async () => {
-    const res = await fetch(`https://openapi.programming-hero.com/api/news/category/01`);
+const loadNews = async (catId) => {
+    const res = await fetch(`https://openapi.programming-hero.com/api/news/category/${catId}`);
     const data = await res.json();
     const allNews = data.data;
+    console.log("🚀 ~ loadNews ~ catId:", catId)
 
     // displaying the data to the ui
     const cardContainer = document.getElementById('card-container');
+    cardContainer.innerHTML = '';
     allNews.forEach((singleNews)=>{
-        console.log("🚀 ~ allNews.forEach ~ singleNews:", singleNews)
+        // console.log("🚀 ~ allNews.forEach ~ singleNews:", singleNews)
         const cardDiv = document.createElement('div');
         cardDiv.classList = 'bg-white flex gap-5 items-center rounded-2xl shadow-lg mb-5';
         cardDiv.innerHTML = `
@@ -32,7 +34,7 @@ const loadNews = async () => {
                 ${singleNews.title}
               </h3>
               <p class="text-base text-slate-600">
-                ${singleNews.details}
+                ${singleNews.details.slice(0,500) + '...'}
               </p>
             </div>
             <div class="news-info flex justify-between p-5 items-center">
@@ -51,5 +53,5 @@ const loadNews = async () => {
         cardContainer.appendChild(cardDiv);
     })
 }
-loadNews();
+loadNews("01");
 loadCategories();
