@@ -53,7 +53,7 @@ const loadNews = async (catId) => {
     const newsCount = document.getElementById('news-count-div');
     // show a message if no news found
     if(allNews.length){
-      newsCount.innerHTML = `<h3 class="text-2xl font-semibold text-green-500">${allNews.length} news found in this category</h3>`;
+      newsCount.innerHTML = `<h3 class="text-center mb-5 text-2xl font-semibold text-green-500">${allNews.length} news found in this category</h3>`;
       // remove the previous message when new category is loaded
     }else{
       newsCount.innerHTML = `<h3 class="text-2xl font-semibold text-red-600">No news found in this category</h3>`;
