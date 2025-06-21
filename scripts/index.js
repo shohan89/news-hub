@@ -15,13 +15,10 @@ const loadNews = async (catId) => {
     const res = await fetch(`https://openapi.programming-hero.com/api/news/category/${catId}`);
     const data = await res.json();
     const allNews = data.data;
-    console.log("🚀 ~ loadNews ~ catId:", catId)
-
     // displaying the data to the ui
     const cardContainer = document.getElementById('card-container');
     cardContainer.innerHTML = '';
     allNews.forEach((singleNews)=>{
-        // console.log("🚀 ~ allNews.forEach ~ singleNews:", singleNews)
         const cardDiv = document.createElement('div');
         cardDiv.classList = 'bg-white flex gap-5 items-center rounded-2xl shadow-lg mb-5';
         cardDiv.innerHTML = `
@@ -53,5 +50,17 @@ const loadNews = async (catId) => {
         cardContainer.appendChild(cardDiv);
     })
 }
+// handle search 
+const handleSearch = () => {
+    const searchInput = document.getElementById('search-field');
+    const searchText = searchInput.value;
+    if(searchText){
+        loadNews(searchText);
+    }else{
+        alert('Please enter a valid category ID!!');
+    }
+}
+
+
 loadNews("01");
 loadCategories();
