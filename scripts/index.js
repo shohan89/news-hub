@@ -49,6 +49,15 @@ const loadNews = async (catId) => {
         `;
         cardContainer.appendChild(cardDiv);
     })
+    // show the number of news found
+    const newsCount = document.getElementById('news-count-div');
+    // show a message if no news found
+    if(allNews.length){
+      newsCount.innerHTML = `<h3 class="text-2xl font-semibold text-green-500">${allNews.length} news found in this category</h3>`;
+      // remove the previous message when new category is loaded
+    }else{
+      newsCount.innerHTML = `<h3 class="text-2xl font-semibold text-red-600">No news found in this category</h3>`;
+    }
 }
 // handle search 
 const handleSearch = () => {
@@ -60,6 +69,7 @@ const handleSearch = () => {
         alert('Please enter a valid category ID!!');
     }
 }
+// show the number of news found and show a message if no news found
 
 
 loadNews("01");
