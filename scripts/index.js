@@ -59,6 +59,7 @@ const loadNews = async (catId) => {
       // remove the previous message when new category is loaded
     }else{
       newsCount.innerHTML = `<h3 class="text-2xl font-semibold text-red-600">No news found in this category</h3>`;
+      document.getElementById('spinner-div').classList = 'loading loading-spinner text-warning hidden';
     }
 }
 // handle search 
