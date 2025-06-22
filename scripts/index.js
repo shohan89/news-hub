@@ -12,6 +12,7 @@ const loadCategories = async () => {
 }
 // Load all news and display to the UI.
 const loadNews = async (catId) => {
+  document.getElementById('spinner-div').classList = 'loading loading-spinner text-warning visible';
     const res = await fetch(`https://openapi.programming-hero.com/api/news/category/${catId}`);
     const data = await res.json();
     const allNews = data.data;
@@ -19,6 +20,7 @@ const loadNews = async (catId) => {
     const cardContainer = document.getElementById('card-container');
     cardContainer.innerHTML = '';
     allNews.forEach((singleNews)=>{
+      document.getElementById('spinner-div').classList = 'loading loading-spinner text-warning hidden';
         const cardDiv = document.createElement('div');
         cardDiv.classList = 'bg-white flex gap-5 items-center rounded-2xl shadow-lg mb-5';
         cardDiv.innerHTML = `
